@@ -1,0 +1,5 @@
+# La carpeta de .vscode, algo que no es de tu incumbencia
+.vscode/*
+
+# La carpeta de construccion, que por obvias razones se debe ignorar
+build/*
