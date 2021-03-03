@@ -18,7 +18,8 @@ void foo(std::shared_ptr<SimpleClass> simple)
 
 int main()
 {
-   /* Esto es un puntero "desnudo".
+   /* SimpleClass* simple = new SimpleClass;
+      Esto es un puntero "desnudo". 
       Siempre hay que encontrar una manera de no usar punteros desnudos.
    
       Es muy inseguro crear un puntero desnudo destinado a ser compartido con
