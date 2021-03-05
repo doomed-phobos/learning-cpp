@@ -46,7 +46,6 @@ int main()
    */
    
    std::shared_ptr<SimpleClass> simple = std::make_shared<SimpleClass>();
-
    foo(simple);
 
    return 0;
