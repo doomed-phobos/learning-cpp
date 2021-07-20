@@ -9,17 +9,11 @@ DATA_DIR = f"{CWD}\data"
 SUCCESS_STYLE = colorama.Fore.LIGHTYELLOW_EX
 ERROR_STYLE = colorama.Fore.LIGHTRED_EX
 
-def has_one_empty(list: List):
-   for item in list:
-      if not item:
-         return True
-   return False
-
 def get_name_and_dir(text: str) -> Tuple[str, str]:
    for line in text.split(";"):
       if line:
          nd = line.split("|")
-         if not has_one_empty(nd):
+         if not any(not item for item in nd):
             yield tuple(nd)
 
 def main(argv):
