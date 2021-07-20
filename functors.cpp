@@ -1,5 +1,5 @@
 // =================
-//  UNARY PREDICATE
+//  FUNCTORS
 // =================
 // Se usa cuando usamos algoritmos que terminan_if (como count_if, find_if)
 // 
@@ -26,6 +26,7 @@
 
 using namespace std;
 
+// Functor
 struct is_separator {
    const string& separator;
 
@@ -44,7 +45,9 @@ struct is_separator {
 
 int main()
 {
+   
 
+   string str = "A";
    size_t size = count_if(str.begin(), str.end(), is_separator("o"));
    printf("%lld\n", size);
 

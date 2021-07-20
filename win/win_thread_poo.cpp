@@ -128,22 +128,35 @@ private:
    CRITICAL_SECTION m_handle;
 };
 
-mutex mt;
+class lock_guard
+{
+public:
+   lock_guard(mutex& mtx) : m_mtx(mtx) {
+      m_mtx.lock();
+   }
 
+   ~lock_guard() {
+      m_mtx.unlock();
+   }
+private:
+   mutex& m_mtx;
+};
+
+mutex mt;
+// TODO: Hablar sobre una clase que contenga memoria y poder manipularda correctamente
 void foo()
 {
-   mt.lock();
+   lock_guard lg(mt);
    for(int i = 0; i < 50; i++) {
       printf("Thread: %d   %d\n", this_thread::get_id(), i);
    }
-   mt.unlock();
 }
 
 int main()
 {
    thread t(foo);
    thread t2(foo);
-
+   
    t.join();
    t2.join();
 
