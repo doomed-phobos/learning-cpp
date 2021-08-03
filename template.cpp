@@ -20,6 +20,7 @@ inline typename std::enable_if<std::is_convertible<T, U>::value, U>::type conver
 //          plantillas
 // =======================
 // Declaracion inicial: Esto será por defecto. void se usa porque es el tipo que da enable_if si es falso
+// ♥ ¿Usado para class/struct?
 template<typename T, typename = void>
 struct sk_strip_enum
 {
@@ -45,7 +46,11 @@ struct enable_if<true, T>
    using type = T;
 };
 
-template<typename T>
+// ♥ Otra forma de habilitar un template es usar:
+//    template<typename T, enable_if<(...), int> = 0>
+//                      -> unnamed_type = default_value
+// ♥ ¿Usado para funciones?
+template<typename T, std::enable_if_t<std::numeric_limits<T>::is_signed, int> = 0>
 constexpr bool is_negative(const T& n)
 {
    return n < T(0);
@@ -57,7 +62,7 @@ struct Factorial
    static constexpr const size_t value = n * Factorial<n-1>::value;
 };
 
-template<size_t n>
+template<long long n>
 struct Factorial<n, typename std::enable_if<is_negative(n)>::type>
 {
    static constexpr const size_t value = 0;
@@ -95,7 +100,7 @@ int main()
    // function<void()> foo([a](){printf("%d\n", a);}); => Correcto
    // function<void()> foo(nullptr);
    // convert_to<int, std::string>(12);
-   /*enum A {};
+   enum A {};
    enum B : int {};
    enum C : unsigned int {};
    enum D : std::uint8_t {
@@ -105,17 +110,10 @@ int main()
    };
 
    sk_strip_enum<A>::type;
-   sk_strip_enum<std::string>::type;*/
+   sk_strip_enum<std::string>::type;
 
    function<int()> f();
-   // function<int()> f([&]()->int{return 0;});
-
-   // Factorial<5>::value; // 5 * 4 * 3 * 2 * 1
-
-   // get_Nth_type<2, int, int>::type;
-
-   // Calcula: 1 + 2 + 3 + ... + n
-   // Suma<-1>::value;
+   // is_negative<unsigned int>(12);
 
    return 0;
 }
