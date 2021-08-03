@@ -35,8 +35,6 @@ def main(argv):
       print(SUCCESS_STYLE + "Warning: No se pasó ningun proyecto a ejecutar")
    except subprocess.CalledProcessError as e:
       print(ERROR_STYLE + f"CalledProcessError: {e}")
-   except BaseException as e:
-      print(f"Error: {e}")
 
 if __name__ == "__main__":
    main(sys.argv)
